@@ -15,19 +15,12 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 		RuleFor(x => x.Price).GreaterThan(0).WithMessage("Price must be greate than 0");
     }
 }
-internal class CreateProductHandler(IDocumentSession session, IValidator<CreateProductCommand> validator)
+internal class CreateProductHandler(IDocumentSession session)
 	: ICommandHandler<CreateProductCommand, CreateProductResult>
 {
 	public async Task<CreateProductResult> Handle(CreateProductCommand command, 
 		CancellationToken cancellationToken)
 	{
-		//Validate product fields
-		var result = await validator.ValidateAsync(command, cancellationToken);
-		var errors = result.Errors.Select(r => r.ErrorMessage).ToList();
-		if (errors.Any())
-		{
-			throw new ValidationException(errors.FirstOrDefault());
-		}
 
 		//create product entity via command object
 		var product = new Product
