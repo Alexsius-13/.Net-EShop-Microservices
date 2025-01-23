@@ -5,3 +5,5 @@ global using Mapster;
 global using Carter;
 global using FluentValidation;
 global using BuildingBlocks.Behaviors;
+global using Basket.API.Exceptions;
+global using Marten;

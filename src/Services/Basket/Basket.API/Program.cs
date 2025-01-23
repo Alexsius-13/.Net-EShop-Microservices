@@ -7,6 +7,11 @@ builder.Services.AddMediatR(config =>
 	config.RegisterServicesFromAssembly(assembly);
 	config.AddOpenBehavior(typeof(ValidationBehavior<,>));
 });
+builder.Services.AddMarten(opt =>
+{
+	opt.Connection(builder.Configuration.GetConnectionString("Database")!);
+	opt.Schema.For<ShoppingCart>().Identity(x => x.Username);
+}).UseLightweightSessions();
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddCarter();
 
