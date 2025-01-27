@@ -1,3 +1,5 @@
+using Basket.API.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Add services to the container.
@@ -14,6 +16,7 @@ builder.Services.AddMarten(opt =>
 }).UseLightweightSessions();
 builder.Services.AddValidatorsFromAssembly(assembly);
 builder.Services.AddCarter();
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 var app = builder.Build();
 
