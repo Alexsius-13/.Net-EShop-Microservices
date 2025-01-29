@@ -1,7 +1,4 @@
-﻿
-using Basket.API.Basket.GetBasket;
-
-namespace Basket.API.Basket.DeleteBasket;
+﻿namespace Basket.API.Basket.DeleteBasket;
 
 
 //public record DeleteBasketRequest(string UserName);
