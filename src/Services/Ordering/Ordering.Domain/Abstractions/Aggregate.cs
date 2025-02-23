@@ -3,7 +3,7 @@
 public abstract class Aggregate<TId> : Entity<TId>, IAggregate<TId>
 {
 	private readonly List<IDomainEvent> _domainEvents = new();
-	public IReadOnlyList<IDomainEvent> Events => throw new NotImplementedException();
+	public IReadOnlyList<IDomainEvent> Events => _domainEvents.AsReadOnly();
 
 	public void AddDomainEvent(IDomainEvent domainEvent)
 	{
