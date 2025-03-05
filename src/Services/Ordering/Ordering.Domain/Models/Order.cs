@@ -14,5 +14,46 @@ public class Order : Aggregate<OrderId>
 		get => OrderItems.Sum(o => o.Price * o.Quantity);
 		private set { }
 	}
+
+	public static Order Create(OrderId id, CustomerId customerId, OrderName orderName,
+		Address shoppingAddress, Address billingAddress,  Payment payment)
+	{
+		var order = new Order
+		{
+			Id = id,
+			CustomerId = customerId,
+			OrderName = orderName,
+			ShoppingAddress = shoppingAddress,
+			BillingAddress = billingAddress,
+			Payment = payment,
+			Status = OrderStatus.Pending
+		};
+
+		order.AddDomainEvent(new OrderCreatedEvent(order));
+
+		return order;
+
+	}
+	
+	public void UpdateOrder(OrderName orderName, Address shoppingAddress, Address billingAddres
+		,Payment payment, OrderStatus status)
+	{
+		OrderName = orderName;
+		ShoppingAddress = shoppingAddress;
+		BillingAddress = billingAddres;
+		Payment = payment;
+		Status = status;
+
+		AddDomainEvent(new OrderUpdatedEvent(this));
+	}
+
+	public void Remove(ProductId productId)
+	{
+		var order = _orderItems.FirstOrDefault(o => o.ProductId == productId);
+		if(order is not null)
+		{
+			_orderItems.Remove(order);
+		}
+	}
 }
 
