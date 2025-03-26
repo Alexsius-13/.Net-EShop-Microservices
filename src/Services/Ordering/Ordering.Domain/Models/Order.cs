@@ -45,7 +45,7 @@ public class Order : Aggregate<OrderId>
 		_orderItems.Add(orderItem);
 	}
 
-	public void UpdateOrder(OrderName orderName, Address shippingAddress, Address billingAddres
+	public void Update(OrderName orderName, Address shippingAddress, Address billingAddres
 		,Payment payment, OrderStatus status)
 	{
 		OrderName = orderName;
