@@ -11,5 +11,5 @@ public record OrderDto(
 		AddressDto BillingAddress,
 		PaymentDto Payment,
 		OrderStatus OrderStatus,
-		List<OrderItem> OrderItems
+		List<OrderItemDto> OrderItems
 	);
